@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600&display=swap');
 
 .world-page {
+  position: relative;
   width: 100vw;
   height: 100vh;
   background: linear-gradient(to bottom, #060610, #0a0a1a, #0d0a06);
@@ -10,6 +11,43 @@
   justify-content: center;
   gap: 40px;
   overflow: hidden;
+}
+
+.world-page::before,
+.world-page::after {
+  content: '';
+  position: absolute;
+  inset: -12% -10%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.world-page::before {
+  background: repeating-linear-gradient(
+    -16deg,
+    transparent 0 22px,
+    rgba(190, 205, 240, 0.22) 22px 23px,
+    transparent 23px 52px
+  );
+  opacity: 0.34;
+  animation: worldRainShift 1.15s linear infinite;
+}
+
+.world-page::after {
+  background: repeating-linear-gradient(
+    -16deg,
+    transparent 0 30px,
+    rgba(160, 180, 235, 0.14) 30px 31px,
+    transparent 31px 66px
+  );
+  opacity: 0.28;
+  animation: worldRainShift 1.8s linear infinite;
+  filter: blur(0.4px);
+}
+
+.world-page > * {
+  position: relative;
+  z-index: 2;
 }
 
 .world-header {
@@ -42,8 +80,8 @@
 /* ---- BASE PORTAL ---- */
 .era-portal {
   position: relative;
-  width: 230px;
-  height: 360px;
+  width: 246px;
+  height: 384px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -62,9 +100,9 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 136px;
-  height: 252px;
-  border-radius: 68px 68px 0 0;
+  width: 148px;
+  height: 274px;
+  border-radius: 74px 74px 0 0;
   overflow: hidden;
   transition: box-shadow 0.4s ease;
 }
@@ -98,7 +136,7 @@
 
 .portal__label {
   position: absolute;
-  top: 268px;
+  top: 292px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -145,7 +183,7 @@
 }
 
 .era-portal--70s .portal__handle { background: #D97706; box-shadow: 0 0 6px #D97706; }
-.era-portal--70s .portal__decade { color: #8B5E1A; font-style: italic; }
+.era-portal--70s .portal__decade { color: #F6D34A; font-style: italic; }
 .era-portal--70s .portal__hint   { color: rgba(252,211,77,0.5); }
 
 .era-portal--70s:hover .portal__door {
@@ -182,7 +220,7 @@
 }
 
 .era-portal--90s .portal__handle { background: #6b7280; }
-.era-portal--90s .portal__decade { color: #374151; letter-spacing: 0.05em; }
+.era-portal--90s .portal__decade { color: #E5E7EB; font-style: italic; }
 .era-portal--90s .portal__hint   { color: rgba(229,231,235,0.4); }
 
 .era-portal--90s:hover .portal__door {
@@ -213,7 +251,7 @@
 }
 
 .era-portal--now .portal__handle { background: #06B6D4; box-shadow: 0 0 8px #06B6D4; }
-.era-portal--now .portal__decade { color: #06B6D4; letter-spacing: 0.18em; }
+.era-portal--now .portal__decade { color: #06B6D4; font-style: italic; }
 .era-portal--now .portal__hint   { color: rgba(6,182,212,0.5); }
 
 .era-portal--now:hover .portal__door {
@@ -230,6 +268,7 @@
   top: 20px;
   left: 24px;
   font-size: 0.85rem;
+  font-family: monospace;
   color: rgba(255,255,255,0.4);
   letter-spacing: 0.1em;
   transition: color 0.3s;
@@ -237,24 +276,33 @@
 
 .back-arrow:hover { color: rgba(255,255,255,0.8); }
 
+@keyframes worldRainShift {
+  from {
+    transform: translate3d(0, -10%, 0);
+  }
+  to {
+    transform: translate3d(-3%, 12%, 0);
+  }
+}
+
 @media (max-width: 1024px) {
   .era-portals {
     gap: 28px;
   }
 
   .era-portal {
-    width: 200px;
-    height: 330px;
+    width: 214px;
+    height: 352px;
   }
 
   .portal__door {
-    width: 122px;
-    height: 232px;
-    border-radius: 61px 61px 0 0;
+    width: 132px;
+    height: 248px;
+    border-radius: 66px 66px 0 0;
   }
 
   .portal__label {
-    top: 246px;
+    top: 264px;
   }
 }
 
@@ -267,11 +315,11 @@
 
   .world-header__text {
     font-size: clamp(1.35rem, 7vw, 2rem);
-    letter-spacing: 0.12em;
+    letter-spacing: 0.05em;
   }
 
   .world-header__sub {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
 
   .era-portals {
@@ -279,18 +327,18 @@
   }
 
   .era-portal {
-    width: 120px;
-    height: 265px;
+    width: 132px;
+    height: 284px;
   }
 
   .portal__door {
-    width: 96px;
-    height: 182px;
-    border-radius: 48px 48px 0 0;
+    width: 104px;
+    height: 196px;
+    border-radius: 52px 52px 0 0;
   }
 
   .portal__label {
-    top: 194px;
+    top: 208px;
     gap: 4px;
   }
 
