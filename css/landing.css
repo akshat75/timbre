@@ -422,7 +422,7 @@
   position: absolute;
   width: 1px;
   height: 18px;
-  background: linear-gradient(to bottom, transparent 20%, rgba(180, 160, 120, 0.55));
+  background: linear-gradient(to bottom, transparent 40%, rgba(180, 160, 120, 0.38));
   transform: rotate(15deg);
   
   animation: rainFall linear infinite;
