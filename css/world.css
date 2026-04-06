@@ -1,0 +1,231 @@
+.world-page {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, #060610, #0a0a1a, #0d0a06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  overflow: hidden;
+}
+
+.world-header {
+  text-align: center;
+}
+
+.world-header__text {
+  font-family: 'Georgia', serif;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  color: rgba(255,255,255,0.8);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+}
+
+.world-header__sub {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.15em;
+  font-style: italic;
+}
+
+.era-portals {
+  display: flex;
+  gap: 32px;
+  align-items: flex-end;
+}
+
+/* ---- BASE PORTAL ---- */
+.era-portal {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.era-portal:hover {
+  transform: translateY(-8px);
+}
+
+.portal__door {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 220px;
+  border-radius: 60px 60px 0 0;
+  overflow: hidden;
+  transition: box-shadow 0.4s ease;
+}
+
+.portal__handle {
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* Glow light above each door */
+.portal__light {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.era-portal:hover .portal__light {
+  opacity: 1;
+}
+
+.portal__label {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.portal__decade {
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+}
+
+.portal__hint {
+  font-size: 0.7rem;
+  opacity: 0.5;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+/* ---- 1970s PORTAL — warm amber wood door ---- */
+.era-portal--70s .portal__door {
+  background: linear-gradient(160deg, #3d2208, #5c3410, #3d2208);
+  border: 2px solid #8B5E1A;
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+}
+
+.era-portal--70s .portal__door::before {
+  content: 'LIVE JAZZ';
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: #D97706;
+  text-shadow: 0 0 8px #D97706;
+  animation: lampFlicker 6s infinite;
+}
+
+.era-portal--70s .portal__handle { background: #D97706; box-shadow: 0 0 6px #D97706; }
+.era-portal--70s .portal__decade { color: #FCD34D; font-style: italic; font-family: 'Georgia', serif; }
+.era-portal--70s .portal__hint   { color: rgba(252,211,77,0.5); }
+
+.era-portal--70s:hover .portal__door {
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.5), 0 0 40px rgba(217,119,6,0.4);
+}
+
+.era-portal--70s .portal__light {
+  background: radial-gradient(circle, rgba(217,119,6,0.15) 0%, transparent 70%);
+}
+
+/* ---- 1990s PORTAL — graffiti metal door ---- */
+.era-portal--90s .portal__door {
+  background: linear-gradient(160deg, #1a1a1a, #252525, #1a1a1a);
+  border: 2px solid #374151;
+}
+
+.era-portal--90s .portal__graffiti {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(45deg, transparent 40%, rgba(220,38,38,0.08) 41%, transparent 42%),
+    linear-gradient(-30deg, transparent 50%, rgba(132,204,22,0.06) 51%, transparent 52%);
+}
+
+.era-portal--90s .portal__door::before {
+  content: 'TONIGHT';
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: #DC2626;
+  font-family: monospace;
+}
+
+.era-portal--90s .portal__handle { background: #6b7280; }
+.era-portal--90s .portal__decade { color: #e5e7eb; font-family: monospace; font-weight: 700; letter-spacing: 0.05em; }
+.era-portal--90s .portal__hint   { color: rgba(229,231,235,0.4); }
+
+.era-portal--90s:hover .portal__door {
+  box-shadow: 0 0 40px rgba(220,38,38,0.3);
+}
+
+.era-portal--90s .portal__light {
+  background: radial-gradient(circle, rgba(220,38,38,0.12) 0%, transparent 70%);
+}
+
+/* ---- 2020s PORTAL — frosted glass LED panel ---- */
+.era-portal--now .portal__door {
+  background: linear-gradient(160deg, rgba(6,182,212,0.05), rgba(139,92,246,0.08), rgba(236,72,153,0.05));
+  border: 1px solid rgba(6,182,212,0.3);
+  backdrop-filter: blur(4px);
+}
+
+.era-portal--now .portal__door::before {
+  content: '▶ ENTER';
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: #06B6D4;
+  text-shadow: 0 0 10px #06B6D4;
+  font-family: monospace;
+}
+
+.era-portal--now .portal__handle { background: #06B6D4; box-shadow: 0 0 8px #06B6D4; }
+.era-portal--now .portal__decade { color: #e0f7ff; font-family: 'Arial Narrow', sans-serif; letter-spacing: 0.3em; font-weight: 700; }
+.era-portal--now .portal__hint   { color: rgba(6,182,212,0.5); }
+
+.era-portal--now:hover .portal__door {
+  box-shadow: 0 0 40px rgba(6,182,212,0.25), 0 0 60px rgba(236,72,153,0.15);
+}
+
+.era-portal--now .portal__light {
+  background: radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 70%);
+}
+
+/* Back arrow */
+.back-arrow {
+  position: fixed;
+  top: 20px;
+  left: 24px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.1em;
+  transition: color 0.3s;
+}
+
+.back-arrow:hover { color: rgba(255,255,255,0.8); }

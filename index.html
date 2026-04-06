@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timbre</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/landing.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- ====== LANDING CSS SCENE ====== -->
+  <div class="scene scene--landing">
+    <div class="scene__sky"></div>
+    <div class="scene__midground">
+      <div class="building building--left"></div>
+      <div class="building building--right"></div>
+      <div class="lamppost">
+        <div class="lamppost__pole"></div>
+        <div class="lamppost__head"></div>
+        <div class="lamppost__glow"></div>
+      </div>
+    </div>
+    <div class="scene__foreground">
+      <div class="pavement"></div>
+    </div>
+    <div class="scene__fog"></div>
+    <div class="scene__fx" id="rainContainer"></div>
+  </div>
+
+  <!-- ====== UI OVERLAY ====== -->
+  <div class="landing__ui">
+
+    <!-- Memories icon top right -->
+    <div class="memories-icon" id="memoriesIcon" onclick="window.location.href='memories.html'">
+      <div class="memories-icon__vinyl">
+        <div class="memories-icon__hole"></div>
+      </div>
+      <span class="memories-icon__badge" id="memoriesBadge" style="display:none">0</span>
+    </div>
+
+    <!-- Center content -->
+    <div class="landing__center">
+      <h1 class="wordmark">TIMBRE</h1>
+      <p class="tagline">Music has always lived somewhere.</p>
+      <button class="btn--enter" id="enterBtn">Enter the World</button>
+      <div class="landing__search">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Or search for a song directly..."
+          autocomplete="off"
+        />
+        <div class="search-dropdown" id="searchDropdown"></div>
+      </div>
+    </div>
+
+    <!-- Returning user message -->
+    <div class="returning-user" id="returningUser" style="display:none"></div>
+
+  </div>
+
+  <script src="js/memories.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

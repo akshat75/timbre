@@ -1,0 +1,415 @@
+/* =====================
+   LANDING SCENE
+   ===================== */
+.scene--landing {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Sky / background — deep dark blue-black gradient */
+.scene__sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    #060610 0%,
+    #0a0a1a 40%,
+    #12100e 70%,
+    #1A0F00 100%
+  );
+}
+
+/* Midground — the two dark buildings on either side */
+.scene__midground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 75%;
+}
+
+.building {
+  position: absolute;
+  bottom: 0;
+  background: #0d0b09;
+  border-top: 2px solid #2a1f0f;
+}
+
+.building--left {
+  left: 0;
+  width: 28%;
+  height: 90%;
+  /* Irregular roofline using clip-path */
+  clip-path: polygon(0 15%, 20% 0%, 50% 8%, 80% 2%, 100% 10%, 100% 100%, 0 100%);
+}
+
+.building--right {
+  right: 0;
+  width: 30%;
+  height: 80%;
+  clip-path: polygon(0 12%, 30% 5%, 60% 0%, 85% 6%, 100% 0%, 100% 100%, 0 100%);
+}
+
+/* Windows on buildings — using box-shadow trick */
+.building--left::after,
+.building--right::after {
+  content: '';
+  position: absolute;
+  inset: 10% 10%;
+  background: transparent;
+  box-shadow:
+    15px 10px 0 0 rgba(255, 200, 80, 0.15),
+    15px 40px 0 0 rgba(255, 200, 80, 0.08),
+    15px 70px 0 0 rgba(255, 200, 80, 0.12),
+    55px 10px 0 0 rgba(255, 200, 80, 0.06),
+    55px 40px 0 0 rgba(255, 200, 80, 0.18),
+    55px 70px 0 0 rgba(255, 200, 80, 0.05),
+    95px 10px 0 0 rgba(255, 200, 80, 0.10),
+    95px 40px 0 0 rgba(255, 200, 80, 0.07),
+    95px 70px 0 0 rgba(255, 200, 80, 0.14);
+  width: 8px;
+  height: 12px;
+}
+
+/* Lamppost */
+.lamppost {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.lamppost__pole {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 200px;
+  background: linear-gradient(to right, #2a1f0f, #4a3820, #2a1f0f);
+}
+
+.lamppost__head {
+  position: absolute;
+  bottom: 195px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 20px;
+  background: #3a2c1a;
+  border-radius: 4px 4px 0 0;
+}
+
+.lamppost__head::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: #FCD34D;
+  border-radius: 50%;
+  box-shadow:
+    0 0 10px 4px rgba(252, 211, 77, 0.8),
+    0 0 30px 15px rgba(217, 119, 6, 0.4),
+    0 0 80px 40px rgba(217, 119, 6, 0.15);
+  animation: lampFlicker 8s infinite;
+}
+
+.lamppost__glow {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    ellipse at 50% 10%,
+    rgba(252, 211, 77, 0.08) 0%,
+    rgba(217, 119, 6, 0.04) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Foreground — pavement */
+.scene__foreground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 18%;
+}
+
+.pavement {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    #1c1410 0%,
+    #120e0a 100%
+  );
+  border-top: 1px solid #2a1f0f;
+}
+
+/* Pavement reflection of lamp */
+.pavement::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(252, 211, 77, 0.07),
+    transparent
+  );
+}
+
+/* Fog layer */
+.scene__fog {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 60%, rgba(20, 15, 5, 0.3) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 30% at 20% 70%, rgba(10, 8, 4, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 25% at 80% 65%, rgba(10, 8, 4, 0.35) 0%, transparent 60%);
+  pointer-events: none;
+  animation: fogDrift 20s ease-in-out infinite alternate;
+}
+
+/* =====================
+   LANDING UI OVERLAY
+   ===================== */
+.landing__ui {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* children re-enable as needed */
+}
+
+.landing__center {
+  text-align: center;
+  pointer-events: all;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.wordmark {
+  font-family: 'Georgia', serif;
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: #FCD34D;
+  text-shadow:
+    0 0 20px rgba(252, 211, 77, 0.5),
+    0 0 60px rgba(217, 119, 6, 0.3);
+  animation: wordmarkGlow 4s ease-in-out infinite alternate;
+}
+
+.tagline {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  color: rgba(252, 211, 77, 0.6);
+  letter-spacing: 0.2em;
+  font-style: italic;
+}
+
+.btn--enter {
+  margin-top: 8px;
+  padding: 14px 40px;
+  background: transparent;
+  border: 1px solid rgba(252, 211, 77, 0.5);
+  color: #FCD34D;
+  font-family: 'Georgia', serif;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  transition: all 0.3s ease;
+}
+
+.btn--enter:hover {
+  background: rgba(252, 211, 77, 0.1);
+  border-color: #FCD34D;
+  box-shadow: 0 0 20px rgba(252, 211, 77, 0.2);
+}
+
+/* Search bar */
+.landing__search {
+  position: relative;
+  width: min(420px, 90vw);
+  margin-top: 8px;
+}
+
+.landing__search input {
+  width: 100%;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(252, 211, 77, 0.2);
+  border-radius: 2px;
+  color: rgba(252, 211, 77, 0.7);
+  font-family: 'Georgia', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.landing__search input::placeholder {
+  color: rgba(252, 211, 77, 0.3);
+}
+
+.landing__search input:focus {
+  border-color: rgba(252, 211, 77, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Search dropdown */
+.search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #1a1208;
+  border: 1px solid rgba(252, 211, 77, 0.2);
+  border-top: none;
+  z-index: 100;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.search-result {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-result:hover {
+  background: rgba(252, 211, 77, 0.08);
+}
+
+.search-result img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+}
+
+.search-result__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-result__song {
+  font-size: 0.85rem;
+  color: #FCD34D;
+}
+
+.search-result__artist {
+  font-size: 0.75rem;
+  color: rgba(252, 211, 77, 0.5);
+}
+
+/* Memories icon */
+.memories-icon {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  cursor: pointer;
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memories-icon__vinyl {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #2a2a2a 0deg,
+    #1a1a1a 60deg,
+    #2a2a2a 120deg,
+    #1a1a1a 180deg,
+    #2a2a2a 240deg,
+    #1a1a1a 300deg,
+    #2a2a2a 360deg
+  );
+  border: 2px solid rgba(252, 211, 77, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s;
+}
+
+.memories-icon:hover .memories-icon__vinyl {
+  border-color: rgba(252, 211, 77, 0.7);
+}
+
+.memories-icon__hole {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #FCD34D;
+}
+
+.memories-icon__badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #D97706;
+  color: #fff;
+  font-size: 0.65rem;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Returning user */
+.returning-user {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: all;
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(252, 211, 77, 0.5);
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.returning-user:hover {
+  color: rgba(252, 211, 77, 0.8);
+}
+
+/* Rain container */
+.scene__fx {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.rain-drop {
+  position: absolute;
+  width: 1px;
+  height: 18px;
+  background: linear-gradient(to bottom, transparent, rgba(180, 160, 120, 0.3));
+  transform: rotate(15deg);
+  animation: rainFall linear infinite;
+}

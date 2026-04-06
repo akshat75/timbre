@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timbre — Choose Your Era</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/world.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <div class="world-page">
+
+    <!-- Back arrow -->
+    <a href="index.html" class="back-arrow">← Back</a>
+
+    <!-- Memories icon -->
+    <div class="memories-icon" onclick="window.location.href='memories.html'">
+      <div class="memories-icon__vinyl">
+        <div class="memories-icon__hole"></div>
+      </div>
+      <span class="memories-icon__badge" id="memoriesBadge" style="display:none">0</span>
+    </div>
+
+    <div class="world-header">
+      <h2 class="world-header__text">Choose Your Era</h2>
+      <p class="world-header__sub">Where do you want to go?</p>
+    </div>
+
+    <div class="era-portals">
+
+      <!-- 1970s Portal -->
+      <div class="era-portal era-portal--70s" id="portal70s" onclick="enterEra('1970s')">
+        <div class="portal__door">
+          <div class="portal__handle"></div>
+          <div class="portal__window"></div>
+        </div>
+        <div class="portal__light"></div>
+        <div class="portal__label">
+          <span class="portal__decade">The Seventies</span>
+          <span class="portal__hint">4 venues · Jazz, Disco, Rock, Soul</span>
+        </div>
+      </div>
+
+      <!-- 1990s Portal -->
+      <div class="era-portal era-portal--90s" id="portal90s" onclick="enterEra('1990s')">
+        <div class="portal__door">
+          <div class="portal__handle"></div>
+          <div class="portal__graffiti"></div>
+        </div>
+        <div class="portal__light"></div>
+        <div class="portal__label">
+          <span class="portal__decade">The Nineties</span>
+          <span class="portal__hint">4 venues · Grunge, Hip-Hop, Indie, R&B</span>
+        </div>
+      </div>
+
+      <!-- 2020s Portal -->
+      <div class="era-portal era-portal--now" id="portalNow" onclick="enterEra('2020s')">
+        <div class="portal__door">
+          <div class="portal__handle"></div>
+          <div class="portal__scanline"></div>
+        </div>
+        <div class="portal__light"></div>
+        <div class="portal__label">
+          <span class="portal__decade">Now</span>
+          <span class="portal__hint">4 venues · Hyperpop, Lo-fi, Trap, Bedroom Pop</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/memories.js"></script>
+  <script>
+    function enterEra(era) {
+      sessionStorage.setItem('currentEra', era);
+      window.location.href = 'street.html';
+    }
+
+    // Show memories badge
+    const memories = JSON.parse(localStorage.getItem('timbre_memories') || '[]');
+    const badge = document.getElementById('memoriesBadge');
+    if (memories.length > 0) {
+      badge.textContent = memories.length;
+      badge.style.display = 'flex';
+    }
+  </script>
+</body>
+</html>

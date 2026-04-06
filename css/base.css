@@ -1,0 +1,52 @@
+/* ===================== */
+/* reset default browser spacing */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  /* padding and borders are included within an element's width */
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /*no scrollbar*/
+}
+
+body {
+  font-family: 'Georgia', serif;
+  background: #000;
+  color: #fff;
+}
+
+/* =====================
+   CSS VARIABLES — GLOBAL
+   ===================== */
+:root {
+  /* 1970s */
+  --era-70s-bg:      #1A0F00;
+  --era-70s-amber:   #D97706;
+  --era-70s-warm:    #FCD34D;
+  --era-70s-shadow:  #78350F;
+
+  /* 1990s */
+  --era-90s-bg:      #0D0D0D;
+  --era-90s-red:     #DC2626;
+  --era-90s-green:   #84CC16;
+  --era-90s-grey:    #374151;
+
+  /* 2020s */
+  --era-now-bg:      #000000;
+  --era-now-cyan:    #06B6D4;
+  --era-now-pink:    #EC4899;
+  --era-now-purple:  rgba(139, 92, 246, 0.3);
+
+  /* Song colour (set dynamically by JS) */
+  --song-color: #D97706;
+}
+
+/* =====================
+   UTILITY
+   ===================== */
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; background: none; }

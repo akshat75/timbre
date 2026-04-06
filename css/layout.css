@@ -1,0 +1,66 @@
+/* =====================
+   LAYOUT — Shared across pages
+   ===================== */
+
+/* Reuse memories icon on all pages */
+.memories-icon {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memories-icon__vinyl {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #2a2a2a 0deg, #1a1a1a 60deg, #2a2a2a 120deg,
+    #1a1a1a 180deg, #2a2a2a 240deg, #1a1a1a 300deg, #2a2a2a 360deg
+  );
+  border: 2px solid rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s;
+}
+
+.memories-icon__hole {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.memories-icon__badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #D97706;
+  color: #fff;
+  font-size: 0.65rem;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-arrow {
+  position: fixed;
+  top: 20px;
+  left: 24px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.1em;
+  transition: color 0.3s;
+  z-index: 1000;
+  text-decoration: none;
+}
+
+.back-arrow:hover { color: rgba(255,255,255,0.8); }
