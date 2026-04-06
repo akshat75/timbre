@@ -110,15 +110,15 @@
   bottom: -8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   background: #FCD34D;
   border-radius: 50%;
   box-shadow:
     0 0 14px 5px rgba(252, 211, 77, 0.82),
     0 0 34px 16px rgba(217, 119, 6, 0.42),
     0 0 80px 40px rgba(217, 119, 6, 0.15);
-  animation: lampFlicker 8s infinite;
+  animation: lampFlicker 5s infinite;
 }
 
 .lamppost__glow {
@@ -126,14 +126,16 @@
   bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
-  width: 300px;
-  height: 300px;
+  width: 480px;
+  height: 430px;
+  border-radius: 50%;
   background: radial-gradient(
     ellipse at 50% 10%,
     rgba(252, 211, 77, 0.08) 0%,
     rgba(217, 119, 6, 0.04) 40%,
-    transparent 70%
+    transparent 70%   
   );
+  filter: blur(12px);  /* ← this blurs the sharp circular border away */
   pointer-events: none;
 }
 
@@ -164,13 +166,16 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
+  width: 140px;        /* wider so it fans out */
   height: 100%;
   background: linear-gradient(
     to bottom,
-    rgba(252, 211, 77, 0.07),
-    transparent
+    rgba(252, 211, 77, 0.10) 0%,    /* brighter at lamp base */
+    rgba(252, 211, 77, 0.04) 40%,   /* fades quickly */
+    transparent 70%                  /* gone before bottom */
   );
+  filter: blur(5px);   /* ← softens edges so it blends into pavement */
+  border-radius: 0 0 50% 50%;  /* rounded bottom — like a real light cone */
 }
 
 /* Fog layer */
@@ -203,40 +208,46 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .wordmark {
+  position: relative;
+  top: -15px;
   font-family: 'Georgia', serif;
   font-size: clamp(3rem, 10vw, 7rem);
   font-weight: 400;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.25em;
   color: #FCD34D;
   text-shadow:
-    0 0 20px rgba(252, 211, 77, 0.5),
-    0 0 60px rgba(217, 119, 6, 0.3);
-  animation: wordmarkGlow 4s ease-in-out infinite alternate;
+    0 0 20px rgba(252, 211, 77, 0.4),
+    0 0 60px rgba(217, 119, 6, 0.2);
+  animation: wordmarkGlow 3s ease-in-out infinite alternate;
 }
 
 .tagline {
+  position: relative;
+  top: -15px;
   font-size: clamp(0.9rem, 2vw, 1.2rem);
   color: rgba(252, 211, 77, 0.6);
   font-style: italic;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   font-family: 'Inter', 'Segoe UI', sans-serif;
   margin-bottom: 16px;
 }
 
 .btn--enter {
-  margin-top: 14px;
+  margin-top: 18px;
   padding: 16px 48px;
   background: transparent;
   border: 1px solid rgba(252, 211, 77, 0.5);
   color: #FCD34D;
-  font-family: 'Inter', 'Segoe UI', sans-serif;
-  font-size: 1.08rem;
+  border-radius: 30px;
+  font-family: 'Inter', sans-serif;
+  font-style: italic;
+  font-size: 1.2rem;
   font-weight: 500;
-  letter-spacing: 0.15em;
+  
   transition: all 0.3s ease;
 }
 
@@ -422,7 +433,7 @@
   position: absolute;
   width: 1px;
   height: 18px;
-  background: linear-gradient(to bottom, transparent 40%, rgba(180, 160, 120, 0.38));
+  background: linear-gradient(to bottom, rgba(205, 213, 165, 0.473));
   transform: rotate(15deg);
   
   animation: rainFall linear infinite;

@@ -29,8 +29,8 @@
     rgba(190, 205, 240, 0.22) 22px 23px,
     transparent 23px 52px
   );
-  opacity: 0.21;
-  animation: worldRainShift 1.15s linear infinite;
+  opacity: 0.18;
+  animation: worldRainShift 2s linear infinite;
 }
 
 .world-page::after {
@@ -40,8 +40,8 @@
     rgba(160, 180, 235, 0.14) 30px 31px,
     transparent 31px 66px
   );
-  opacity: 0.16;
-  animation: worldRainShift 1.8s linear infinite;
+  opacity: 0.12;
+  animation: worldRainShift 1.5s linear infinite;
   filter: blur(0.4px);
 }
 
@@ -80,8 +80,8 @@
 /* ---- BASE PORTAL ---- */
 .era-portal {
   position: relative;
-  width: 257px;
-  height: 400px;
+  width: 220px;
+  height: 410px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -97,7 +97,7 @@
 
 .portal__door {
   position: absolute;
-  top: 0;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
   width: 158px;
@@ -136,7 +136,7 @@
 
 .portal__label {
   position: absolute;
-  top: 292px;
+  top: 320px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -267,10 +267,10 @@
   position: fixed;
   top: 20px;
   left: 24px;
-  font-size: 0.85rem;
+  font-size: 1.1rem;
   font-family: monospace;
   color: rgba(255,255,255,0.4);
-  letter-spacing: 0.1em;
+  letter-spacing: -0.05em;
   transition: color 0.3s;
 }
 

@@ -5,30 +5,35 @@
 /* Lamp flicker — irregular, not smooth */
 @keyframes lampFlicker {
   0%   { opacity: 1; }
-  5%   { opacity: 0.8; }
+  5%   { opacity: 0.6; }
   6%   { opacity: 1; }
-  20%  { opacity: 1; }
-  21%  { opacity: 0.6; }
+  7%   { opacity: 0.7; }
+  8%  { opacity: 1; }
+  9%  { opacity: 0.5; }
+  12%  { opacity: 1; }
+  16%  { opacity: 0.6; }
   22%  { opacity: 1; }
+  45%  { opacity: 1; }
+  46%  { opacity: 0.75; }
+  50%  { opacity: 1; }
   60%  { opacity: 1; }
-  61%  { opacity: 0.75; }
-  62%  { opacity: 1; }
+  61% { opacity: 0.6; }
   80%  { opacity: 1; }
-  100% { opacity: 1; }
+  100%  { opacity: 1; }
 }
 
 /* Wordmark subtle glow pulse */
 @keyframes wordmarkGlow {
   from {
     text-shadow:
-      0 0 20px rgba(252, 211, 77, 0.5),
-      0 0 60px rgba(217, 119, 6, 0.3);
+      0 0 20px rgba(252, 211, 77, 0.4),
+      0 0 60px rgba(217, 119, 6, 0.2);
   }
   to {
     text-shadow:
-      0 0 30px rgba(252, 211, 77, 0.7),
-      0 0 80px rgba(217, 119, 6, 0.5),
-      0 0 120px rgba(217, 119, 6, 0.2);
+      0 0 30px rgba(252, 211, 77, 0.6),
+      0 0 80px rgba(217, 119, 6, 0.4),
+      0 0 120px rgba(217, 119, 6, 0.1);
   }
 }
 
