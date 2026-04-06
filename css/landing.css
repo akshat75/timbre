@@ -97,16 +97,33 @@
   bottom: 195px;
   left: 50%;
   transform: translateX(-50%);
-  width: 50px;
-  height: 20px;
-  background: #3a2c1a;
-  border-radius: 4px 4px 0 0;
+  width: 0;
+  height: 0;
+  background: transparent;
+  border: none;
+}
+
+.lamppost__head::before {
+  content: '';
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(252, 211, 77, 0.2) 0%,
+    rgba(217, 119, 6, 0.08) 45%,
+    transparent 75%
+  );
 }
 
 .lamppost__head::after {
   content: '';
   position: absolute;
-  bottom: -8px;
+  bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
   width: 10px;
@@ -202,14 +219,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
+}
+
+.landing__center h1,
+.landing__center h2,
+.landing__center h3,
+.landing__center h4,
+.landing__center h5,
+.landing__center h6 {
+  font-family: 'Poppins', sans-serif;
 }
 
 .wordmark {
   font-family: 'Georgia', serif;
   font-size: clamp(3rem, 10vw, 7rem);
   font-weight: 400;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.1em;
   color: #FCD34D;
   text-shadow:
     0 0 20px rgba(252, 211, 77, 0.5),
@@ -218,21 +244,26 @@
 }
 
 .tagline {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
   font-size: clamp(0.9rem, 2vw, 1.2rem);
   color: rgba(252, 211, 77, 0.6);
-  letter-spacing: 0.2em;
   font-style: italic;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
 }
 
 .btn--enter {
-  margin-top: 8px;
-  padding: 14px 40px;
+  margin-top: 0;
+  padding: 16px 52px;
   background: transparent;
   border: 1px solid rgba(252, 211, 77, 0.5);
   color: #FCD34D;
-  font-family: 'Georgia', serif;
-  font-size: 1rem;
-  letter-spacing: 0.15em;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
   transition: all 0.3s ease;
 }
 
@@ -244,20 +275,24 @@
 
 /* Search bar */
 .landing__search {
-  position: relative;
-  width: min(420px, 90vw);
-  margin-top: 8px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: min(380px, calc(100vw - 96px));
+  margin-top: 0;
+  z-index: 30;
 }
 
 .landing__search input {
   width: 100%;
-  padding: 10px 16px;
+  padding: 11px 18px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(252, 211, 77, 0.2);
-  border-radius: 2px;
+  border-radius: 999px;
   color: rgba(252, 211, 77, 0.7);
-  font-family: 'Georgia', serif;
-  font-size: 0.85rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
   letter-spacing: 0.05em;
   outline: none;
   transition: border-color 0.3s;
@@ -275,12 +310,12 @@
 /* Search dropdown */
 .search-dropdown {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 8px);
   left: 0;
   right: 0;
   background: #1a1208;
   border: 1px solid rgba(252, 211, 77, 0.2);
-  border-top: none;
+  border-radius: 14px;
   z-index: 100;
   max-height: 260px;
   overflow-y: auto;
@@ -311,11 +346,14 @@
 }
 
 .search-result__song {
+  font-family: 'Inter', sans-serif;
   font-size: 0.85rem;
+  font-weight: 600;
   color: #FCD34D;
 }
 
 .search-result__artist {
+  font-family: 'Inter', sans-serif;
   font-size: 0.75rem;
   color: rgba(252, 211, 77, 0.5);
 }
@@ -386,6 +424,7 @@
   transform: translateX(-50%);
   pointer-events: all;
   text-align: center;
+  font-family: 'Inter', sans-serif;
   font-size: 0.8rem;
   color: rgba(252, 211, 77, 0.5);
   letter-spacing: 0.08em;
@@ -407,9 +446,27 @@
 
 .rain-drop {
   position: absolute;
-  width: 1px;
-  height: 18px;
-  background: linear-gradient(to bottom, transparent, rgba(180, 160, 120, 0.3));
+  width: 2px;
+  height: 26px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(240, 220, 170, 0.55) 100%);
   transform: rotate(15deg);
+  filter: drop-shadow(0 0 2px rgba(252, 211, 77, 0.35));
   animation: rainFall linear infinite;
+}
+
+@media (max-width: 768px) {
+  .landing__search {
+    top: 14px;
+    left: 14px;
+    width: calc(100vw - 92px);
+  }
+
+  .tagline {
+    margin-bottom: 12px;
+  }
+
+  .btn--enter {
+    padding: 14px 38px;
+    font-size: 1rem;
+  }
 }

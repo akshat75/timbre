@@ -51,14 +51,14 @@ function generateRain() {
   const container = document.getElementById('rainContainer');
   if (!container) return;
 
-  for (let i = 0; i < 80; i++) {
+  for (let i = 0; i < 150; i++) {
     const drop = document.createElement('div');
     drop.className = 'rain-drop';
     drop.style.left = Math.random() * 100 + 'vw';
-    drop.style.top = Math.random() * -100 + 'px';
-    drop.style.animationDuration = (0.6 + Math.random() * 0.8) + 's';
+    drop.style.top = Math.random() * -160 + 'px';
+    drop.style.animationDuration = (0.5 + Math.random() * 0.55) + 's';
     drop.style.animationDelay = (Math.random() * 2) + 's';
-    drop.style.opacity = (0.1 + Math.random() * 0.25).toString();
+    drop.style.opacity = (0.3 + Math.random() * 0.45).toString();
     container.appendChild(drop);
   }
 }
