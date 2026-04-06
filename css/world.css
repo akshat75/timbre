@@ -123,7 +123,6 @@
 }
 
 .era-portal--70s .portal__door::before {
-  content: 'LIVE JAZZ';
   position: absolute;
   top: 30px;
   left: 50%;
@@ -162,7 +161,6 @@
 }
 
 .era-portal--90s .portal__door::before {
-  content: 'TONIGHT';
   position: absolute;
   top: 24px;
   left: 50%;
@@ -193,7 +191,6 @@
 }
 
 .era-portal--now .portal__door::before {
-  content: '▶ ENTER';
   position: absolute;
   top: 24px;
   left: 50%;
