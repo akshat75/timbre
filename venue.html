@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timbre</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/venue.css">
+  <style>
+    /* Temporary shell styles — replace on Day 3 */
+    
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Georgia, serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .shell-venue-name {
+      font-size: 3rem;
+      font-style: italic;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: shellFadeIn 0.8s ease 0.3s forwards;
+    }
+    .shell-location {
+      font-size: 0.85rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent, #D97706);
+      margin-top: 12px;
+      opacity: 0;
+      animation: shellFadeIn 0.8s ease 0.7s forwards;
+    }
+    .shell-back {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    body {
+      animation: venueArrival 0.8s ease forwards;
+    }
+
+    @keyframes venueArrival {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .shell-back:hover { color: #fff; }
+    @keyframes shellFadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="street.html" class="shell-back">← Back</a>
+
+  <div class="shell-venue-name" id="venueNameDisplay">Loading...</div>
+  <div class="shell-location" id="venueLocationDisplay"></div>
+
+  <script src="js/world.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/navigation.js"></script>
+  <script>
+    // Read venue from sessionStorage
+    const venueData = JSON.parse(sessionStorage.getItem('currentVenue') || 'null');
+    const searchedSong = JSON.parse(sessionStorage.getItem('searchedSong') || 'null');
+
+    if (venueData) {
+      document.getElementById('venueNameDisplay').textContent = venueData.name;
+      document.getElementById('venueLocationDisplay').textContent = venueData.location;
+      document.title = `Timbre — ${venueData.name}`;
+      // Set the accent color as a CSS variable
+      document.documentElement.style.setProperty('--accent', venueData.accentColor);
+      // Add the venue class to body (for CSS theming — used fully on Day 3+)
+      document.body.classList.add(venueData.venueClass);
+    } else {
+      // No venue data — shouldn't happen, but handle gracefully
+      document.getElementById('venueNameDisplay').textContent = 'Something went wrong';
+      document.getElementById('venueLocationDisplay').textContent = 'Try searching from the landing page';
+    }
+
+    if (searchedSong) {
+      console.log('Song to play first:', searchedSong.trackName, '—', searchedSong.artistName);
+      // This gets wired on Day 3 when we build audio.js
+    }
+  </script>
+</body>
+</html>

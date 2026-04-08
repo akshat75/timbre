@@ -62,3 +62,139 @@ function generateRain() {
     container.appendChild(drop);
   }
 }
+
+
+let searchTimeout = null;  // used to debounce — don't fire API on every keystroke
+let previewAudio = null;   // for the dropdown song previews
+
+const searchInput    = document.getElementById('searchInput');
+const searchDropdown = document.getElementById('searchDropdown');
+
+// --- Search input listener ---
+searchInput.addEventListener('input', () => {
+  const term = searchInput.value.trim();
+
+  // Clear any pending search
+  clearTimeout(searchTimeout);
+
+  if (term.length < 2) {
+    closeDropdown();
+    return;
+  }
+
+  // Wait 300ms after user stops typing, then search
+  searchTimeout = setTimeout(async () => {
+    const results = await API.searchSongs(term, 8);
+    renderDropdown(results);
+  }, 100);
+});
+
+// Close dropdown if user clicks outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.search-container')) {
+    closeDropdown();
+  }
+});
+
+// --- Render the dropdown ---
+function renderDropdown(tracks) {
+  if (!tracks.length) {
+    searchDropdown.innerHTML = `<div class="search-empty">No results found</div>`;
+    searchDropdown.classList.add('search-dropdown--open');
+    return;
+  }
+
+  searchDropdown.innerHTML = tracks.map((track, i) => `
+    <div class="search-result" data-index="${i}" tabindex="0">
+      <img 
+        class="search-result-art" 
+        src="${track.artworkUrl60 || ''}" 
+        alt="${track.trackName}"
+        onerror="this.style.display='none'"
+      />
+      <div class="search-result-info">
+        <div class="search-result-name">${track.trackName || 'Unknown'}</div>
+        <div class="search-result-artist">${track.artistName || ''} · ${track.releaseDate ? new Date(track.releaseDate).getFullYear() : ''}</div>
+      </div>
+      <div class="search-result-genre">${track.primaryGenreName || ''}</div>
+    </div>
+  `).join('');
+
+  // Store results on the dropdown element so click handlers can access them
+  searchDropdown._results = tracks;
+
+  // Hover to preview
+  searchDropdown.querySelectorAll('.search-result').forEach((el, i) => {
+    el.addEventListener('mouseenter', () => playPreview(tracks[i].previewUrl));
+    el.addEventListener('mouseleave', stopPreview);
+    el.addEventListener('click', () => selectSong(tracks[i]));
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') selectSong(tracks[i]);
+    });
+  });
+
+  searchDropdown.classList.add('search-dropdown--open');
+}
+
+function closeDropdown() {
+  searchDropdown.classList.remove('search-dropdown--open');
+  stopPreview();
+}
+
+// --- Song preview on hover ---
+function playPreview(url) {
+  if (!url) return;
+  stopPreview();
+  previewAudio = new Audio(url);
+  previewAudio.volume = 0.4;
+  previewAudio.play().catch(() => {}); // catch autoplay block silently
+}
+
+function stopPreview() {
+  if (previewAudio) {
+    previewAudio.pause();
+    previewAudio = null;
+  }
+}
+
+// --- User picks a song ---
+async function selectSong(track) {
+  stopPreview();
+  closeDropdown();
+
+  // Detect which venue this song belongs to
+  const venue = mapSongToVenue(track);
+
+  // Show loading screen and navigate
+  await Navigation.goToVenue(venue, 'venue.html', track);
+}
+
+// --- Returning user message ---
+// Check localStorage for last visited venue and show it on the landing
+function showReturningUserMessage() {
+  const memories = JSON.parse(localStorage.getItem('timbre_memories') || '[]');
+  if (!memories.length) return;
+
+  const last = memories[memories.length - 1];
+  const msg = document.getElementById('returningUserMsg');
+  if (!msg) return;
+
+  msg.textContent = `Welcome back. Your last visit: ${last.venueName}, ${last.era}`;
+  msg.style.display = 'block';
+  msg.addEventListener('click', () => {
+    const venue = findVenueByClass(last.venueClass);
+    if (venue) Navigation.goToVenue(venue, 'venue.html');
+  });
+}
+
+function findVenueByClass(venueClass) {
+  for (const era of Object.values(WORLD)) {
+    for (const venue of Object.values(era)) {
+      if (venue.venueClass === venueClass) return venue;
+    }
+  }
+  return null;
+}
+
+// Run on page load
+showReturningUserMessage();
