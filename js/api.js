@@ -4,7 +4,7 @@ const LASTFM_KEY = 'f0ca6bb10f9491abe1aede60063bf87b';
 const API = {
 
   // Search songs as user types : used for the search dropdown
-  async searchSongs(term, limit = 8) {
+  async searchSongs(term, limit = 20) {
     try {
       const url = `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&limit=${limit}&country=US&callback=?`;
       // iTunes requires JSONP on some setups, but fetch works on localhost
@@ -64,4 +64,5 @@ const API = {
     const results = await this.searchSongs(artist, 5);
     return results.filter(t => t.previewUrl).slice(0, 3);
   }
+  
 };

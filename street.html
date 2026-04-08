@@ -32,8 +32,13 @@
       <h2 class="street-header__title" id="eraTitle">The Street</h2>
     </div>
 
-    <p class="street-placeholder">Venue selection coming on Day 2 →</p>
+    <div class="venue-grid" id="venueGrid"></div>
   </div>
+
+  <script src="js/world.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/memories.js"></script>
 
   <script>
     const era = sessionStorage.getItem('currentEra');
@@ -48,5 +53,6 @@
     const badge = document.getElementById('memoriesBadge');
     if (memories.length > 0) { badge.textContent = memories.length; badge.style.display = 'flex'; }
   </script>
+  <script src="js/street.js"></script>
 </body>
 </html>
