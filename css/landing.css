@@ -229,7 +229,6 @@
   font-size: clamp(0.9rem, 2vw, 1.2rem);
   color: rgba(252, 211, 77, 0.6);
   font-style: italic;
-  letter-spacing: 0.08em;
   font-family: 'Georgia', serif;
   margin-bottom: 16px;
 }
