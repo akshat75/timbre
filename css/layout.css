@@ -2,7 +2,35 @@
    LAYOUT — Shared across pages
    ===================== */
 
-/* Reuse memories icon on all pages */
+/* ---- Shared top-centre logo (street, venue, memories) ---- */
+.page-logo-link {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.page-logo {
+  width: 80px;
+  height: auto;
+  filter:
+    drop-shadow(0 0 5px rgba(252, 211, 77, 0.18))
+    drop-shadow(0 0 16px rgba(217, 119, 6, 0.08));
+  transition: filter 0.3s ease;
+}
+
+.page-logo-link:hover .page-logo {
+  filter:
+    drop-shadow(0 0 8px rgba(252, 211, 77, 0.60))
+    drop-shadow(0 0 24px rgba(217, 119, 6, 0.30));
+}
+
+/* ---- Memories icon (all pages) ---- */
 .memories-icon {
   position: fixed;
   top: 20px;
@@ -51,6 +79,7 @@
   justify-content: center;
 }
 
+/* ---- Back arrow (all pages) ---- */
 .back-arrow {
   position: fixed;
   top: 20px;
@@ -61,6 +90,7 @@
   transition: color 0.3s;
   z-index: 1000;
   text-decoration: none;
+  font-family: 'Georgia', serif;
 }
 
 .back-arrow:hover { color: rgba(255,255,255,0.8); }

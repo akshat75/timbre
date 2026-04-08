@@ -9,7 +9,6 @@
   overflow: hidden;
 }
 
-/* Sky / background — deep dark blue-black gradient */
 .scene__sky {
   position: absolute;
   inset: 0;
@@ -22,7 +21,6 @@
   );
 }
 
-/* Midground — the two dark buildings on either side */
 .scene__midground {
   position: absolute;
   bottom: 0;
@@ -42,7 +40,6 @@
   left: 0;
   width: 28%;
   height: 90%;
-  /* Irregular roofline using clip-path */
   clip-path: polygon(0 15%, 20% 0%, 50% 8%, 80% 2%, 100% 10%, 100% 100%, 0 100%);
 }
 
@@ -53,7 +50,6 @@
   clip-path: polygon(0 12%, 30% 5%, 60% 0%, 85% 6%, 100% 0%, 100% 100%, 0 100%);
 }
 
-/* Windows on buildings — using box-shadow trick */
 .building--left::after,
 .building--right::after {
   content: '';
@@ -74,11 +70,16 @@
   height: 12px;
 }
 
-/* Lamppost */
-.lamppost {
+.lamppost1 {
   position: absolute;
   bottom: 0;
-  left: 50%;
+  left: 33%;
+  transform: translateX(-50%);
+}
+.lamppost2 {
+  position: absolute;
+  bottom: 0;
+  left: 66%;
   transform: translateX(-50%);
 }
 
@@ -90,16 +91,6 @@
   width: 4px;
   height: 200px;
   background: linear-gradient(to right, #2a1f0f, #4a3820, #2a1f0f);
-}
-
-.lamppost__head {
-  position: absolute;
-  bottom: 195px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  background: transparent;
 }
 
 .lamppost__head::after {
@@ -119,6 +110,16 @@
   animation: lampFlicker 5s infinite;
 }
 
+.lamppost__head {
+  position: absolute;
+  bottom: 195px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
 .lamppost__glow {
   position: absolute;
   bottom: 100px;
@@ -131,13 +132,12 @@
     ellipse at 50% 10%,
     rgba(252, 211, 77, 0.08) 0%,
     rgba(217, 119, 6, 0.04) 40%,
-    transparent 70%   
+    transparent 70%
   );
-  filter: blur(12px);  /* ← this blurs the sharp circular border away */
+  filter: blur(12px);
   pointer-events: none;
 }
 
-/* Foreground — pavement */
 .scene__foreground {
   position: absolute;
   bottom: 0;
@@ -149,34 +149,41 @@
 .pavement {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    #1c1410 0%,
-    #120e0a 100%
-  );
+  background: linear-gradient(to bottom, #1c1410 0%, #120e0a 100%);
   border-top: 1px solid #2a1f0f;
 }
 
-/* Pavement reflection of lamp */
+/* Shared styles for both glows */
+.pavement::before,
 .pavement::after {
   content: '';
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 140px;        /* wider so it fans out */
+  width: 140px;
   height: 100%;
   background: linear-gradient(
     to bottom,
-    rgba(252, 211, 77, 0.10) 0%,    /* brighter at lamp base */
-    rgba(252, 211, 77, 0.04) 40%,   /* fades quickly */
-    transparent 70%                  /* gone before bottom */
+    rgba(252, 211, 77, 0.10) 0%,
+    rgba(252, 211, 77, 0.04) 40%,
+    transparent 70%
   );
-  filter: blur(5px);   /* ← softens edges so it blends into pavement */
-  border-radius: 0 0 50% 50%;  /* rounded bottom — like a real light cone */
+  filter: blur(5px);
+  border-radius: 0 0 50% 50%;
 }
 
-/* Fog layer */
+/* First glow at 33% */
+.pavement::before {
+  left: 33%;
+  transform: translateX(-50%);
+}
+
+/* Second glow at 66% */
+.pavement::after {
+  left: 66%;
+  transform: translateX(-50%);
+}
+
+
 .scene__fog {
   position: absolute;
   inset: 0;
@@ -197,9 +204,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none; /* children re-enable as needed */
+  pointer-events: none;
 }
 
+/* =====================
+   WHAT IS TIMBRE — top left
+   ===================== */
+.whats-timbre {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  color: rgba(252, 211, 77, 0.45);
+  pointer-events: all;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  z-index: 120;
+}
+
+.whats-timbre:hover {
+  color: rgba(252, 211, 77, 0.85);
+}
+
+/* =====================
+   LOGO
+   ===================== */
 .landing__center {
   text-align: center;
   pointer-events: all;
@@ -209,32 +241,56 @@
   gap: 12px;
 }
 
-.wordmark {
+/* Glow wrapper — replicates the old text-shadow glow */
+.logo-glow-wrap {
   position: relative;
-  top: -15px;
-  font-family: 'Georgia', serif;
-  font-size: clamp(3rem, 10vw, 7rem);
-  font-weight: 400;
-  letter-spacing: 0.25em;
-  color: #FCD34D;
-  text-shadow:
-    0 0 20px rgba(252, 211, 77, 0.4),
-    0 0 60px rgba(217, 119, 6, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.logo-glow-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -30% -20%;
+  background: radial-gradient(
+    ellipse at 50% 55%,
+    rgba(252, 211, 77, 0.18) 0%,
+    rgba(217, 119, 6, 0.08) 45%,
+    transparent 70%
+  );
+  filter: blur(18px);
+  pointer-events: none;
+  animation: wordmarkGlow 3s ease-in-out infinite alternate;
+}
+
+.landing-logo {
+  width: 500px;
+  height: auto;
+  position: relative;
+  top:-20px;
+  filter:
+    drop-shadow(0 0 12px rgba(252, 211, 77, 0.35))
+    drop-shadow(0 0 32px rgba(217, 119, 6, 0.18));
   animation: wordmarkGlow 3s ease-in-out infinite alternate;
 }
 
 .tagline {
   position: relative;
-  top: -15px;
+  top:-20px;
   font-size: clamp(0.9rem, 2vw, 1.2rem);
   color: rgba(252, 211, 77, 0.6);
   font-style: italic;
+  letter-spacing: 0.08em;
   font-family: 'Georgia', serif;
   margin-bottom: 16px;
 }
 
 .btn--enter {
-  margin-top: 18px;
+  position: relative;
+  top:-20px;
+  margin-top: 20px;
   padding: 16px 48px;
   background: transparent;
   border: 1px solid rgba(252, 211, 77, 0.5);
@@ -244,7 +300,6 @@
   font-style: italic;
   font-size: 1.2rem;
   font-weight: 500;
-  
   transition: all 0.3s ease;
 }
 
@@ -252,93 +307,6 @@
   background: rgba(252, 211, 77, 0.1);
   border-color: #FCD34D;
   box-shadow: 0 0 20px rgba(252, 211, 77, 0.2);
-}
-
-/* Search bar */
-.landing__search {
-  position: fixed;
-  top: 24px;
-  left: 24px;
-  width: min(420px, calc(100vw - 48px));
-  margin-top: 0;
-  z-index: 120;
-  pointer-events: all;
-}
-
-.landing__search input {
-  width: 100%;
-  padding: 10px 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(252, 211, 77, 0.2);
-  border-radius: 999px;
-  color: rgba(252, 211, 77, 0.7);
-  font-family: 'Georgia', serif;
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
-  outline: none;
-  transition: border-color 0.3s;
-}
-
-.landing__search input::placeholder {
-  color: rgba(252, 211, 77, 0.3);
-}
-
-.landing__search input:focus {
-  border-color: rgba(252, 211, 77, 0.5);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-/* Search dropdown */
-.search-dropdown {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  right: 0;
-  background: #1a1208;
-  border: 1px solid rgba(252, 211, 77, 0.2);
-  border-radius: 14px;
-  z-index: 100;
-  max-height: 260px;
-  overflow-y: auto;
-  display: none;
-}
-
-.search-dropdown:not(:empty) {
-  display: block;
-}
-
-.search-result {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.search-result:hover {
-  background: rgba(252, 211, 77, 0.08);
-}
-
-.search-result img {
-  width: 36px;
-  height: 36px;
-  object-fit: cover;
-}
-
-.search-result__text {
-  display: flex;
-  flex-direction: column;
-}
-
-.search-result__song {
-  font-size: 0.85rem;
-  color: #FCD34D;
-}
-
-.search-result__artist {
-  font-size: 0.75rem;
-  color: rgba(252, 211, 77, 0.5);
 }
 
 /* Memories icon */
@@ -412,6 +380,7 @@
   letter-spacing: 0.08em;
   cursor: pointer;
   transition: color 0.3s;
+  white-space: nowrap;
 }
 
 .returning-user:hover {
@@ -432,11 +401,17 @@
   height: 18px;
   background: linear-gradient(to bottom, rgba(205, 213, 165, 0.473));
   transform: rotate(15deg);
-  
   animation: rainFall linear infinite;
 }
 
+/* =====================
+   RESPONSIVE
+   ===================== */
 @media (max-width: 900px) {
+  .landing-logo {
+    width: clamp(200px, 55vw, 380px);
+  }
+
   .tagline {
     font-size: clamp(1rem, 2.8vw, 1.15rem);
     letter-spacing: 0.07em;
@@ -446,25 +421,23 @@
     padding: 15px 42px;
     font-size: 1.03rem;
   }
-
-  .landing__search {
-    top: 18px;
-    left: 16px;
-    width: min(390px, calc(100vw - 96px));
-  }
 }
 
 @media (max-width: 600px) {
   .landing__center {
-    gap: 12px;
+    gap: 10px;
     width: min(100%, 520px);
     padding: 0 14px;
+  }
+
+  .landing-logo {
+    width: clamp(180px, 72vw, 300px);
   }
 
   .tagline {
     margin-bottom: 10px;
     max-width: 90vw;
-    font-size: clamp(0.98rem, 4.8vw, 1.12rem);
+    font-size: clamp(0.9rem, 4.2vw, 1.05rem);
     letter-spacing: 0.05em;
   }
 
@@ -475,141 +448,9 @@
     letter-spacing: 0.12em;
   }
 
-  .landing__search {
-    top: 14px;
-    left: 10px;
-    width: calc(100vw - 84px);
+  .whats-timbre {
+    top: 18px;
+    left: 16px;
+    font-size: 0.78rem;
   }
-
-  .landing__search input {
-    padding: 9px 14px;
-    font-size: 0.82rem;
-  }
-}
-/* ── Search Bar ── */
-.search-container {
-  position: relative;
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
-}
-
-.search-input {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 2px;
-  color: rgba(255, 255, 255, 0.7);
-  font-family: Georgia, serif;
-  font-size: 0.85rem;
-  font-style: italic;
-  padding: 14px 20px;
-  outline: none;
-  transition: border-color 0.3s, background 0.3s;
-  box-sizing: border-box;
-  letter-spacing: 0.02em;
-}
-
-.search-input::placeholder {
-  color: rgba(255, 255, 255, 0.25);
-}
-
-.search-input:focus {
-  border-color: rgba(255, 255, 255, 0.25);
-  background: rgba(255, 255, 255, 0.07);
-}
-
-/* ── Dropdown ── */
-.search-dropdown {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  right: 0;
-  background: #0d0d0d;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 2px;
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  transition: max-height 0.3s ease, opacity 0.3s ease;
-  z-index: 100;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-}
-
-.search-dropdown--open {
-  max-height: 420px;
-  opacity: 1;
-  overflow-y: auto;
-}
-
-/* Scrollbar styling */
-.search-dropdown::-webkit-scrollbar { width: 4px; }
-.search-dropdown::-webkit-scrollbar-track { background: transparent; }
-.search-dropdown::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
-
-.search-result {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 16px;
-  cursor: pointer;
-  transition: background 0.2s;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-}
-
-.search-result:last-child {
-  border-bottom: none;
-}
-
-.search-result:hover {
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.search-result-art {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 2px;
-  flex-shrink: 0;
-  opacity: 0.85;
-}
-
-.search-result-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.search-result-name {
-  font-family: Georgia, serif;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.9);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.search-result-artist {
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.35);
-  margin-top: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.search-result-genre {
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.2);
-  flex-shrink: 0;
-}
-
-.search-empty {
-  padding: 20px;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.25);
-  font-family: Georgia, serif;
-  font-style: italic;
-  font-size: 0.85rem;
 }

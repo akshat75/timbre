@@ -1,4 +1,4 @@
-// js/world.js
+
 
 const WORLD = {
   '1970s': {
