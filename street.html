@@ -46,7 +46,7 @@
     const eraTitle = document.getElementById('eraTitle');
     eraLabel.textContent = era;
     const eraTitles = { '1970s': 'The Seventies', '1990s': 'The Nineties', '2020s': 'Now' };
-    eraTitle.textContent = eraTitles[era] || era;
+    eraTitle.textContent = eraTitles[era];
     document.body.classList.add('era--' + era.replace('s',''));
 
     const memories = JSON.parse(localStorage.getItem('timbre_memories') || '[]');

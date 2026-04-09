@@ -1,6 +1,6 @@
 // =====================
 // STREET PAGE — street.js
-// Renders venue selection cards for the current era
+
 // =====================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const grid  = document.getElementById('venueGrid');
   if (!era || !grid) return;
 
-  const venues = Object.values(WORLD[era] || {});
+  const venues = Object.values(WORLD[era]);
   if (!venues.length) {
     grid.innerHTML = '<p style="color:rgba(255,255,255,0.2);font-style:italic">No venues found for this era.</p>';
     return;

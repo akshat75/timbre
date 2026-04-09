@@ -2,17 +2,6 @@
 
 const WORLD = {
   '1970s': {
-    jazz: {
-      name: 'The Jazz Lounge',
-      location: 'New York, 1973',
-      era: '1970s',
-      genre: 'jazz',
-      lastfmTag: 'jazz',
-      venueClass: 'venue--jazz-70s',
-      description: 'Smoky rooms and late-night standards',
-      artists: ['Miles Davis', 'John Coltrane', 'Herbie Hancock', 'Bill Evans'],
-      accentColor: '#D97706'
-    },
     disco: {
       name: 'Saturday Night',
       location: 'New York, 1977',
@@ -23,6 +12,17 @@ const WORLD = {
       description: 'Where the night never ends',
       artists: ['Donna Summer', 'Chic', 'Earth Wind & Fire', 'Bee Gees'],
       accentColor: '#F59E0B'
+    },
+    jazz: {
+      name: 'The Jazz Lounge',
+      location: 'New York, 1973',
+      era: '1970s',
+      genre: 'jazz',
+      lastfmTag: 'jazz',
+      venueClass: 'venue--jazz-70s',
+      description: 'Smoky rooms and late-night standards',
+      artists: ['Miles Davis', 'John Coltrane', 'Herbie Hancock', 'Bill Evans'],
+      accentColor: '#D97706'
     },
     rock: {
       name: 'The Amphitheatre',
@@ -176,8 +176,8 @@ function mapSongToVenue(track) {
   // Genre keyword matching — but only within the forced era
   const ERA_GENRE_MAP = {
     '1970s': [
-      { keywords: ['jazz', 'blues', 'bebop', 'swing'],          genre: 'jazz'   },
       { keywords: ['disco', 'funk'],                             genre: 'disco'  },
+      { keywords: ['jazz', 'blues', 'bebop', 'swing'],          genre: 'jazz'   },
       { keywords: ['rock', 'classic rock', 'hard rock', 'folk'],genre: 'rock'   },
       { keywords: ['soul', 'motown', 'gospel', 'r&b'],          genre: 'soul'   },
     ],
