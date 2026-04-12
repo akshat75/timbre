@@ -1095,7 +1095,7 @@ body.era--2020 .ss-fog { opacity: 0; }
 .moon2 {
   position: relative;
   top: 10%;
-  left:75%;
+  left:80%;
   width: 45px; height: 45px;
   border-radius: 50%;
   background: radial-gradient(circle at 38% 35%, #c1dfec66, #68748950 55%, #40455036);

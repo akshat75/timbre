@@ -237,13 +237,15 @@
    WORLD HEADER
    ===================== */
 .world-header {
+  position:relative;
+  top:15px;
   text-align: center;
   margin-top: 60px; /* clear the fixed logo */
 }
 
 .world-header__text {
   font-family: 'Georgia', serif;
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: 2.4rem;
   color: rgba(255, 255, 255, 0.89);
   font-weight: 350;
   letter-spacing: 0.05em;
@@ -254,7 +256,7 @@
 
 .world-header__sub {
   margin-top: 7px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: rgba(255,255,255,0.3);
   letter-spacing: 0.1em;
   font-style: italic;
@@ -266,14 +268,15 @@
    ===================== */
 .era-portals {
   display: flex;
-  gap: 44px;
+  gap: 36px;
   align-items: flex-end;
 }
 
 .era-portal {
   position: relative;
+  top:7px;
   width: 220px;
-  height: 410px;
+  height: 450px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -292,9 +295,9 @@
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 158px;
-  height: 290px;
-  border-radius: 74px 74px 0 0;
+  width: 170px;
+  height: 310px;
+  border-radius: 82px 82px 0 0;
   overflow: hidden;
   transition: box-shadow 0.4s ease;
 }
@@ -327,7 +330,7 @@
 
 .portal__label {
   position: absolute;
-  top: 320px;
+  top: 340px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
