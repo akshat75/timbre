@@ -39,7 +39,7 @@ body {
   --era-now-bg:      #000000;
   --era-now-cyan:    #06B6D4;
   --era-now-pink:    #EC4899;
-  --era-now-purple:  rgba(139, 92, 246, 0.3);
+  --era-now-purple:  #8b5cf64d;
 
   /* Song colour (set dynamically by JS) */
   --song-color: #D97706;

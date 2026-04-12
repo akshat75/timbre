@@ -14,10 +14,10 @@
   inset: 0;
   background: linear-gradient(
     to bottom,
-    #060610 0%,
-    #0a0a1a 40%,
-    #12100e 70%,
-    #1A0F00 100%
+    #060611 0%,
+    #0b0b2a 40%,
+    #100a05 70%,
+    #1a0f00 100%
   );
 }
 
@@ -32,7 +32,7 @@
 .building {
   position: absolute;
   bottom: 0;
-  background: #0d0b09;
+  background: #0c0a08;
   border-top: 2px solid #2a1f0f;
 }
 
@@ -101,12 +101,12 @@
   transform: translateX(-50%);
   width: 12px;
   height: 12px;
-  background: #FCD34D;
+  background: #F6D34A;
   border-radius: 50%;
   box-shadow:
-    0 0 14px 5px rgba(252, 211, 77, 0.82),
-    0 0 34px 16px rgba(217, 119, 6, 0.42),
-    0 0 80px 40px rgba(217, 119, 6, 0.15);
+    0 0 14px 5px rgb(207, 170, 47),
+    0 0 34px 16px rgba(201, 121, 9, 0.695),
+    0 0 80px 40px rgba(219, 142, 7, 0.445);
   animation: lampFlicker 5s infinite;
 }
 
@@ -218,7 +218,7 @@
   font-style: italic;
   font-size: 1rem;
   letter-spacing: 0.08em;
-  color: rgba(252, 211, 77, 0.45);
+  color: #f6d44a98;
   pointer-events: all;
   text-decoration: none;
   transition: color 0.3s ease;
@@ -376,7 +376,7 @@
   pointer-events: all;
   text-align: center;
   font-size: 0.8rem;
-  color: rgba(252, 211, 77, 0.5);
+  color: #f6d44a7f;
   letter-spacing: 0.08em;
   cursor: pointer;
   transition: color 0.3s;
@@ -384,7 +384,7 @@
 }
 
 .returning-user:hover {
-  color: rgba(252, 211, 77, 0.8);
+  color: #f6d44abb;
 }
 
 /* Rain container */
@@ -399,7 +399,7 @@
   position: absolute;
   width: 1px;
   height: 18px;
-  background: linear-gradient(to bottom, rgba(205, 213, 165, 0.473));
+  background: linear-gradient(to bottom, rgba(233, 235, 181, 0.55));
   transform: rotate(15deg);
   animation: rainFall linear infinite;
 }
