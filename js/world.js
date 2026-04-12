@@ -107,15 +107,15 @@ const WORLD = {
       artists: ['100 gecs', 'Charli XCX', 'SOPHIE', 'Bladee'],
       accentColor: '#EC4899'
     },
-    lofi: {
-      name: 'The Lo-fi Bedroom',
+    indie: {
+      name: 'The Indie Cafe',
       location: 'Somewhere, 3am',
       era: '2020s',
-      genre: 'lo-fi',
-      lastfmTag: 'lo-fi',
-      venueClass: 'venue--lofi-now',
+      genre: 'indie',
+      lastfmTag: 'britpop',
+      venueClass: 'venue--indie-now',
       description: 'Just you, a lamp, and this song',
-      artists: ['Joji', 'Rex Orange County', 'Men I Trust', 'Clairo'],
+      artists: ['The Strokes', 'Mac Demarco', 'Tame Impala', 'Clairo'],
       accentColor: '#6366F1'
     },
     trap: {
@@ -156,9 +156,9 @@ const GENRE_MAP = [
   { keywords: ['indie', 'alternative', 'britpop'],    era: '1990s', genre: 'indie'     },
   { keywords: ['r&b', 'rhythm and blues', 'neo soul'],era: '1990s', genre: 'rnb'       },
   { keywords: ['hyperpop', 'electronic', 'edm'],      era: '2020s', genre: 'hyperpop'  },
-  { keywords: ['lo-fi', 'lofi', 'chill'],             era: '2020s', genre: 'lofi'      },
+  { keywords: ['lo-fi', 'lofi', 'chill','indie', 'alternative', 'singer-songwriter'], era: '2020s', genre: 'indie'      },
   { keywords: ['trap', 'drill'],                      era: '2020s', genre: 'trap'       },
-  { keywords: ['pop', 'singer-songwriter', 'folk pop'],era: '2020s', genre: 'bedroompop'}
+  { keywords: ['pop','rock', 'folk pop'],era: '2020s', genre: 'bedroompop'}
 ];
 
 function mapSongToVenue(track) {
@@ -189,10 +189,9 @@ function mapSongToVenue(track) {
     ],
     '2020s': [
       { keywords: ['electronic', 'edm', 'hyperpop'],            genre: 'hyperpop'   },
-      { keywords: ['lo-fi', 'lofi', 'chill', 'ambient'],        genre: 'lofi'       },
+      { keywords: ['lo-fi', 'lofi', 'chill', 'ambient','indie', 'alternative', 'singer-songwriter'], genre: 'indie' },
       { keywords: ['trap', 'drill', 'rap', 'hip-hop', 'hip hop'],genre: 'trap'      },
-      { keywords: ['pop', 'indie', 'alternative', 'folk',
-                   'singer-songwriter', 'rock', 'psychedelic'], genre: 'bedroompop' },
+      { keywords: ['pop','folk','rock', 'psychedelic'], genre: 'bedroompop' },
     ],
   };
 

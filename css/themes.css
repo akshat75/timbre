@@ -125,15 +125,15 @@ body.venue--hyperpop-now .venue-identity__name {
 body.venue--hyperpop-now .record-btn { border-radius: 2px; }
 
 /* ══════════════════════════════
-   2020s — Lo-fi Bedroom
+   2020s — Indie cafe
    ══════════════════════════════ */
-body.venue--lofi-now .venue-scene {
+body.venue--indie-now .venue-scene {
   background:
     radial-gradient(ellipse 70% 55% at 45% 55%, rgba(10, 10, 35, 0.85), transparent),
     radial-gradient(ellipse 40% 50% at 80% 30%, rgba(5, 5, 20, 0.6), transparent),
     #010108;
 }
-body.venue--lofi-now .venue-identity__name { letter-spacing: 0.04em; }
+body.venue--indie-now .venue-identity__name { letter-spacing: 0.04em; }
 
 /* ══════════════════════════════
    2020s — Trap Studio

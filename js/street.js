@@ -57,6 +57,7 @@ function initStreetScene(era) {
     generateMoon(fx);
     generateStreetRain(fx, 60);
   } else if (era === '1990s') {
+    generateMoon2(fx);
     generateCar(fx);
     generateCar2(fx);
     generateStreetRain(fx, 60);
@@ -66,11 +67,16 @@ function initStreetScene(era) {
   }
 }
 
-// Moon - 1970s
+// Moon 
 function generateMoon(container) {
   const moon = document.createElement('div');
   moon.className = 'moon';
   container.appendChild(moon);
+}
+function generateMoon2(container) {
+  const moon2 = document.createElement('div');
+  moon2.className = 'moon2';
+  container.appendChild(moon2);
 }
 
 
@@ -91,17 +97,12 @@ function generateStreetRain(container, count) {
   }
 }
 
-
-
-
-
 // ── Car — 1990s ───────────────────────────────────────────
 function generateCar(container) {
   // Main car body
   const car = document.createElement('div');
   car.className = 'street-car';
 
-  // Headlight (front, left side since driving R→L)
   const headlight = document.createElement('div');
   headlight.className = 'car-headlight';
 
@@ -110,8 +111,8 @@ function generateCar(container) {
 
   const bottomPx = 22;  // px above pavement top
   car.style.cssText = `
-    bottom: calc(18vh + ${bottomPx}px);
-    animation: carDriveRL 10s linear 1s infinite;
+   
+    animation: carDriveRL 10s linear infinite;
   `;
 
   container.appendChild(car);
@@ -130,8 +131,8 @@ function generateCar2(container) {
 
   const bottomPx = 22;  // px above pavement top
   car2.style.cssText = `
-    bottom: calc(18vh + ${bottomPx}px);
-    animation: carDriveRL 7s linear infinite;
+    
+    animation: carDriveRL 8s linear infinite;
   `;
 
   container.appendChild(car2);
