@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     el.onclick = () => {
       sessionStorage.setItem('currentEra', info.era);
       sessionStorage.setItem('currentVenue', JSON.stringify(info));
-      window.location.href = 'venue.html';
+      window.location.href = Navigation.resolveVenuePage(info);
     };
   }
 

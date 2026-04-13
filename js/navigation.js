@@ -1,8 +1,28 @@
 // js/navigation.js
 
+const VENUE_PAGE_BY_CLASS = {
+  'venue--disco-70s': 'venue-disco-70s.html',
+  'venue--jazz-70s': 'venue-jazz-70s.html',
+  'venue--rock-70s': 'venue-rock-70s.html',
+  'venue--soul-70s': 'venue-soul-70s.html',
+  'venue--grunge-90s': 'venue-grunge-90s.html',
+  'venue--hiphop-90s': 'venue-hiphop-90s.html',
+  'venue--indie-90s': 'venue-indie-90s.html',
+  'venue--rnb-90s': 'venue-rnb-90s.html',
+  'venue--hyperpop-now': 'venue-hyperpop-now.html',
+  'venue--indie-now': 'venue-indie-now.html',
+  'venue--trap-now': 'venue-trap-now.html',
+  'venue--bedroompop-now': 'venue-bedroompop-now.html'
+};
+
 const Navigation = {
 
-  async goToVenue(venue, nextPage = 'venue.html', firstSong = null) {
+  resolveVenuePage(venue) {
+    const venueClass = venue?.venueClass;
+    return VENUE_PAGE_BY_CLASS[venueClass] || 'venue.html';
+  },
+
+  async goToVenue(venue, nextPage = null, firstSong = null) {
     sessionStorage.setItem('currentVenue', JSON.stringify(venue));
     sessionStorage.setItem('currentEra', venue.era);
     if (firstSong) {
@@ -11,10 +31,12 @@ const Navigation = {
       sessionStorage.removeItem('searchedSong');
     }
 
+    const destination = nextPage || this.resolveVenuePage(venue);
+
     await this.showLoadingScreen(venue);
 
     // Navigate while screen is still black — no flash
-    window.location.href = nextPage;
+    window.location.href = destination;
   },
 
   showLoadingScreen(venue) {
@@ -54,10 +76,10 @@ const Navigation = {
         }, 200);
       });
 
-      // ↓ Changed: 4500ms total (was 2800ms), NO exit fade — stays black during navigation
+      
       setTimeout(() => {
         resolve(); // navigate immediately while screen is still fully visible
-      }, 4500);
+      }, 4300);
     });
   }
 };

@@ -31,9 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         card.querySelector('.venue-card__enter').addEventListener('click', (e) => {
           e.stopPropagation();
-          Navigation.goToVenue(venue, 'venue.html');
+          Navigation.goToVenue(venue);
         });
-        card.addEventListener('click', () => Navigation.goToVenue(venue, 'venue.html'));
+        card.addEventListener('click', () => Navigation.goToVenue(venue));
 
         grid.appendChild(card);
       });
