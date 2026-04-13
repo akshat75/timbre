@@ -21,7 +21,7 @@ const WORLD = {
       lastfmTag: 'jazz',
       venueClass: 'venue--jazz-70s',
       description: 'Smoky rooms and late-night standards',
-      artists: ['Miles Davis', 'John Coltrane', 'Herbie Hancock', 'Bill Evans'],
+      artists: ['Frank Sinatra', 'Miles Davis', 'John Coltrane', 'Ella Fitzgerald'],
       accentColor: '#D97706'
     },
     rock: {
@@ -126,7 +126,7 @@ const WORLD = {
       lastfmTag: 'trap',
       venueClass: 'venue--trap-now',
       description: 'The city never sleeps',
-      artists: ['Travis Scott', 'Playboi Carti', 'Drake', 'Future'],
+      artists: ['Travis Scott', 'Playboi Carti', 'Drake', 'Kendrick Lamar'],
       accentColor: '#7C3AED'
     },
     bedroompop: {
@@ -137,7 +137,7 @@ const WORLD = {
       lastfmTag: 'bedroom pop',
       venueClass: 'venue--bedroompop-now',
       description: 'Songs that feel like letters',
-      artists: ['Phoebe Bridgers', 'boygenius', 'Big Thief', 'Soccer Mommy'],
+      artists: ['Sabrina Carpenter', 'Harry Styles', 'Taylor Swift', 'Phoebe Bridgers'],
       accentColor: '#F59E0B'
     }
   }

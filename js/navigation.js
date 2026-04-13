@@ -19,7 +19,7 @@ const Navigation = {
 
   resolveVenuePage(venue) {
     const venueClass = venue?.venueClass;
-    return VENUE_PAGE_BY_CLASS[venueClass] || 'venue.html';
+    return VENUE_PAGE_BY_CLASS[venueClass];
   },
 
   async goToVenue(venue, nextPage = null, firstSong = null) {
