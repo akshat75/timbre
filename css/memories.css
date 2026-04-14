@@ -1,0 +1,448 @@
+/* ============================================================
+   memories.css — Timbre Memories Page
+   ============================================================ */
+
+/* ── Page base ──────────────────────────────────────────────── */
+.memories-body {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(217, 119, 6, 0.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 55%),
+    #0a0a0a;
+  color: #fff;
+  padding-bottom: 80px;
+}
+
+/* ── Page header ────────────────────────────────────────────── */
+.mem-header {
+  position: relative;
+  top:-20px;
+  text-align: center;
+  padding: 120px 24px 32px;
+}
+
+.mem-title {
+  font-family: 'Georgia', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: normal;
+  font-style: italic;
+  letter-spacing: 0.05em;
+  color: #fff;
+  margin: 0 0 10px;
+}
+
+.mem-subtitle {
+  font-family: 'Georgia', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  margin: 0;
+}
+
+/* ── Filter strip ───────────────────────────────────────────── */
+.mem-filters {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 24px 40px;
+  flex-wrap: wrap;
+}
+
+.mem-filter {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.45);
+  font-family: 'Georgia', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 7px 18px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.mem-filter:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.mem-filter--active {
+  border-color: #D97706;
+  color: #D97706;
+  background: rgba(217, 119, 6, 0.08);
+}
+
+/* ── Grid ───────────────────────────────────────────────────── */
+.mem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Memory card ────────────────────────────────────────────── */
+.mem-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+
+  /* entrance animation */
+  opacity: 0;
+  animation: cardEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.mem-card:hover {
+  transform: translateY(-4px) scale(1.015);
+  border-color: var(--card-accent, #D97706);
+  box-shadow:
+    0 0 0 1px var(--card-accent, #D97706),
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(var(--card-accent-rgb, 217,119,6), 0.12);
+}
+
+/* ── Art wrap ───────────────────────────────────────────────── */
+.mem-card__art-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #111;
+}
+
+.mem-card__art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease, filter 0.3s ease;
+}
+
+.mem-card:hover .mem-card__art {
+  transform: scale(1.06);
+  filter: brightness(0.75);
+}
+
+.mem-card__art-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  pointer-events: none;
+}
+
+/* Play hint icon — appears on hover ── */
+.mem-card__play-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.mem-card:hover .mem-card__play-hint {
+  opacity: 1;
+}
+
+/* Pulse ring when actually playing */
+.mem-card--playing .mem-card__play-hint {
+  opacity: 1;
+  animation: playPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes playPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.15); }
+}
+
+/* ── Card body ──────────────────────────────────────────────── */
+.mem-card__body {
+  padding: 14px 14px 12px;
+}
+
+.mem-card__song {
+  font-family: 'Georgia', serif;
+  font-size: 0.92rem;
+  font-style: italic;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mem-card__artist {
+  font-family: 'Georgia', serif;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 10px;
+}
+
+.mem-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.mem-card__venue {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--card-accent, #D97706);
+  font-family: 'Georgia', serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 55%;
+}
+
+.mem-card__sep {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.65rem;
+}
+
+.mem-card__era {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: 'Georgia', serif;
+}
+
+.mem-card__date {
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.2);
+  font-family: 'Georgia', serif;
+}
+
+/* ── Delete button ──────────────────────────────────────────── */
+.mem-card__delete {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.2s ease, transform 0.2s ease,
+              background 0.2s ease, color 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.mem-card:hover .mem-card__delete {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.mem-card__delete:hover {
+  background: rgba(220, 38, 38, 0.75);
+  border-color: rgba(220, 38, 38, 0.8);
+  color: #fff;
+}
+
+/* ── Dissolve animation on delete ──────────────────────────── */
+.mem-card--dissolving {
+  pointer-events: none;
+  animation: cardDissolve 0.45s ease forwards !important;
+}
+
+@keyframes cardDissolve {
+  0%   { opacity: 1; transform: scale(1); filter: blur(0px); }
+  60%  { opacity: 0.4; transform: scale(0.94); filter: blur(2px); }
+  100% { opacity: 0; transform: scale(0.88); filter: blur(6px); }
+}
+
+/* ── Accent glow layer (bottom of card) ─────────────────────── */
+.mem-card__glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(
+    to top,
+    rgba(var(--card-accent-rgb, 217,119,6), 0.07),
+    transparent
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mem-card:hover .mem-card__glow {
+  opacity: 1;
+}
+
+/* ── Playing border pulse ───────────────────────────────────── */
+.mem-card--playing {
+  opacity: 1; /* Prevent base opacity:0 re-applying when cardEnter animation is replaced */
+  border-color: var(--card-accent, #D97706) !important;
+  box-shadow:
+    0 0 0 1px var(--card-accent, #D97706),
+    0 0 24px rgba(217,119,6,0.25) !important;
+  animation: cardBorderPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes cardBorderPulse {
+  0%, 100% { box-shadow: 0 0 0 1px var(--card-accent, #D97706), 0 0 16px rgba(217,119,6,0.2); }
+  50%       { box-shadow: 0 0 0 2px var(--card-accent, #D97706), 0 0 32px rgba(217,119,6,0.35); }
+}
+
+/* ── Empty state ────────────────────────────────────────────── */
+.mem-empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  gap: 16px;
+  animation: cardEnter 0.6s ease forwards;
+}
+
+/* CSS vinyl record */
+.mem-empty__vinyl {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #111;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  margin-bottom: 12px;
+  animation: vinylSpin 8s linear infinite;
+  opacity: 0.45;
+}
+
+@keyframes vinylSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.mem-empty__groove {
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 0 0 10px rgba(255,255,255,0.03),
+    0 0 0 20px rgba(255,255,255,0.025),
+    0 0 0 30px rgba(255,255,255,0.02);
+}
+
+.mem-empty__label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mem-empty__text {
+  font-family: 'Georgia', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+  text-align: center;
+}
+
+.mem-empty__sub {
+  font-family: 'Georgia', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.2);
+  margin: 0;
+  text-align: center;
+}
+
+.mem-empty__cta {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 28px;
+  border: 1px solid rgba(217, 119, 6, 0.5);
+  color: #D97706;
+  font-family: 'Georgia', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 100px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.mem-empty__cta:hover {
+  background: rgba(217, 119, 6, 0.12);
+  color: #FCD34D;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .mem-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0 12px;
+  }
+
+  .mem-header {
+    padding: 100px 16px 24px;
+  }
+
+  .mem-card__delete {
+    /* Always slightly visible on touch */
+    opacity: 0.6;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 360px) {
+  .mem-grid {
+    grid-template-columns: 1fr;
+  }
+}
