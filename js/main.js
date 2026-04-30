@@ -18,20 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     badge.style.display = 'flex';
   }
 
-  // --- Returning user message ---
-  const lastVisit = localStorage.getItem('timbre_lastVenue');
-  if (lastVisit) {
-    const info = JSON.parse(lastVisit);
-    const el = document.getElementById('returningUser');
-    el.style.display = 'block';
-    el.textContent = `Welcome back. Your last visit was ${info.venueName}, ${info.era}.`;
-    el.onclick = () => {
-      sessionStorage.setItem('currentEra', info.era);
-      sessionStorage.setItem('currentVenue', JSON.stringify(info));
-      window.location.href = Navigation.resolveVenuePage(info);
-    };
-  }
-
   // --- Rain effect ---
   generateRain();
 

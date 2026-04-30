@@ -35,7 +35,6 @@ const Navigation = {
 
     await this.showLoadingScreen(venue);
 
-    // Navigate while screen is still black — no flash
     window.location.href = destination;
   },
 

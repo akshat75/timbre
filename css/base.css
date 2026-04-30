@@ -19,9 +19,6 @@ body {
   color: #fff;
 }
 
-/* =====================
-   CSS VARIABLES — GLOBAL
-   ===================== */
 :root {
   /* 1970s */
   --era-70s-bg:      #1A0F00;
@@ -45,8 +42,3 @@ body {
   --song-color: #D97706;
 }
 
-/* =====================
-   UTILITY
-   ===================== */
-a { text-decoration: none; color: inherit; }
-button { cursor: pointer; border: none; background: none; }

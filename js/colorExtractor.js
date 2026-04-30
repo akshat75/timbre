@@ -1,7 +1,3 @@
-// =====================
-// COLOR EXTRACTOR — colorExtractor.js
-// Finds the dominant vivid colour in album art using Canvas API
-// =====================
 
 const ColorExtractor = {
 
@@ -19,12 +15,11 @@ const ColorExtractor = {
           const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, SIZE, SIZE);
 
-          const { data } = ctx.getImageData(0, 0, SIZE, SIZE);
+          const { data } = ctx.getImageData(0, 0, SIZE, SIZE);  //pixels
           const freq = {};
 
           for (let i = 0; i < data.length; i += 4) {
             const r = data[i], g = data[i + 1], b = data[i + 2];
-            // Skip near-black, near-white, and near-grey pixels
             const brightness  = (r + g + b) / 3;
             const saturation  = Math.max(r, g, b) - Math.min(r, g, b);
             if (brightness < 25 || brightness > 230) continue;

@@ -143,9 +143,7 @@ const WORLD = {
   }
 };
 
-// --- Genre detection ---
-// When a user searches a song, iTunes tells us the genre.
-// This maps those genre names to the right venue in WORLD.
+// for searchbar
 const GENRE_MAP = [
   { keywords: ['jazz', 'blues', 'bebop'],            era: '1970s', genre: 'jazz'      },
   { keywords: ['disco', 'funk'],                      era: '1970s', genre: 'disco'     },
@@ -173,7 +171,6 @@ function mapSongToVenue(track) {
     else                   forcedEra = '1970s';
   }
 
-  // Genre keyword matching — but only within the forced era
   const ERA_GENRE_MAP = {
     '1970s': [
       { keywords: ['disco', 'funk'],                             genre: 'disco'  },
@@ -207,7 +204,6 @@ function mapSongToVenue(track) {
     return WORLD[forcedEra][defaults[forcedEra]];
   }
 
-  // No year at all — fall back to genre keywords across all eras
   for (const [era, entries] of Object.entries(ERA_GENRE_MAP)) {
     for (const entry of entries) {
       if (entry.keywords.some(k => genreRaw.includes(k))) {
